@@ -1,0 +1,60 @@
+{
+  "common": {
+    "welcome": "Selamat datang",
+    "home": "Beranda",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "login": "Masuk",
+    "logout": "Keluar",
+    "loading": "Memuat...",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "back": "Kembali",
+    "next": "Selanjutnya",
+    "previous": "Sebelumnya",
+    "submit": "Kirim"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "settings": "Pengaturan",
+    "profile": "Profil"
+  },
+  "auth": {
+    "signInTitle": "Masuk ke akun Anda",
+    "signUpTitle": "Buat akun Anda",
+    "email": "Email",
+    "password": "Kata sandi",
+    "welcomeBack": "Selamat Datang Kembali",
+    "signInToJikiro": "Masuk ke akun JIKIRO Anda",
+    "allRightsReserved": "Hak cipta dilindungi",
+    "aiPoweredPlatform": "Platform Pembuatan Konten Bertenaga AI"
+  },
+  "hero": {
+    "title": "JIKIRO",
+    "subtitle": "Platform manajemen AI terbaik untuk content creator. Sederhanakan alur kerja Anda dengan otomatisasi cerdas, penjadwalan pintar, dan integrasi WhatsApp yang mulus.",
+    "badgeText": "Platform Pembuatan Konten Bertenaga AI",
+    "features": {
+      "aiChatbot": {
+        "title": "AI Chatbot",
+        "description": "Asisten cerdas untuk buat konten"
+      },
+      "smartScheduling": {
+        "title": "Penjadwalan Pintar",
+        "description": "Perencanaan kalender otomatis"
+      },
+      "whatsappIntegration": {
+        "title": "Integrasi WhatsApp",
+        "description": "Alur kerja komunikasi yang mulus"
+      }
+    },
+    "cta": {
+      "getStartedFree": "Mulai Gratis"
+    },
+    "socialProof": {
+      "rating": "5.0 dari 1000+ kreator",
+      "trusted": "Dipercaya oleh kreator konten di seluruh dunia"
+    }
+  }
+}

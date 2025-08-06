@@ -1,0 +1,60 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Sign In",
+    "logout": "Sign Out",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "profile": "Profile"
+  },
+  "auth": {
+    "signInTitle": "Sign in to your account",
+    "signUpTitle": "Create your account",
+    "email": "Email",
+    "password": "Password",
+    "welcomeBack": "Welcome Back",
+    "signInToJikiro": "Sign in to your JIKIRO account",
+    "allRightsReserved": "All rights reserved",
+    "aiPoweredPlatform": "AI-Powered Content Creation Platform"
+  },
+  "hero": {
+    "title": "JIKIRO",
+    "subtitle": "The ultimate AI management platform for content creators. Streamline your workflow with intelligent automation, smart scheduling, and seamless WhatsApp integration.",
+    "badgeText": "AI-Powered Content Creation Platform",
+    "features": {
+      "aiChatbot": {
+        "title": "AI Chatbot",
+        "description": "Smart assistant for content creation"
+      },
+      "smartScheduling": {
+        "title": "Smart Scheduling", 
+        "description": "Automated content calendar planning"
+      },
+      "whatsappIntegration": {
+        "title": "WhatsApp Integration",
+        "description": "Seamless communication workflow"
+      }
+    },
+    "cta": {
+      "getStartedFree": "Get Started Free"
+    },
+    "socialProof": {
+      "rating": "5.0 from 1000+ creators",
+      "trusted": "Trusted by content creators worldwide"
+    }
+  }
+}
