@@ -56,5 +56,23 @@
       "rating": "5.0 from 1000+ creators",
       "trusted": "Trusted by content creators worldwide"
     }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome to your dashboard",
+    "navigation": {
+      "overview": "Overview",
+      "myProjects": "My Projects",
+      "services": "Services",
+      "billing": "Billing",
+      "contactUs": "Contact Us",
+      "settings": "Settings"
+    },
+    "footer": {
+      "allRightsReserved": "All rights reserved",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "support": "Support"
+    }
   }
 }

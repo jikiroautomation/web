@@ -2,8 +2,8 @@ import LayoutMain from "@/layout/layout-main";
 import { SignIn } from "@clerk/nextjs";
 import { getTranslations } from "next-intl/server";
 
-export default async function Page() {
-  const t = await getTranslations('auth');
+export default async function SignInPage() {
+  const t = await getTranslations("auth");
   return (
     <LayoutMain>
       <div className="relative min-h-screen flex flex-col">
@@ -13,10 +13,10 @@ export default async function Page() {
             {/* Welcome Section */}
             <div className="text-center mb-8">
               <h1 className="text-3xl font-black text-gray-900 dark:text-white mb-2">
-                {t('welcomeBack')}
+                {t("welcomeBack")}
               </h1>
               <p className="text-gray-600 text-sm dark:text-gray-300">
-                {t('signInToJikiro')}
+                {t("signInToJikiro")}
               </p>
             </div>
 
@@ -53,10 +53,10 @@ export default async function Page() {
           <div className="max-w-4xl mx-auto px-4">
             <div className="border-t border-gray-400 dark:border-gray-600 pt-6">
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                © {new Date().getFullYear()} JIKIRO. {t('allRightsReserved')}.
+                © {new Date().getFullYear()} JIKIRO. {t("allRightsReserved")}.
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                {t('aiPoweredPlatform')}
+                {t("aiPoweredPlatform")}
               </p>
             </div>
           </div>

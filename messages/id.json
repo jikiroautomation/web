@@ -56,5 +56,23 @@
       "rating": "5.0 dari 1000+ kreator",
       "trusted": "Dipercaya oleh kreator konten di seluruh dunia"
     }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Selamat datang di dashboard Anda",
+    "navigation": {
+      "overview": "Ringkasan",
+      "myProjects": "Proyek Saya",
+      "services": "Layanan",
+      "billing": "Tagihan",
+      "contactUs": "Hubungi Kami",
+      "settings": "Pengaturan"
+    },
+    "footer": {
+      "allRightsReserved": "Hak cipta dilindungi",
+      "privacyPolicy": "Kebijakan Privasi",
+      "termsOfService": "Syarat Layanan",
+      "support": "Dukungan"
+    }
   }
 }
