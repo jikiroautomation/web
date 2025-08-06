@@ -10,6 +10,8 @@ import {
   SignedOut,
   RedirectToSignIn,
 } from "@clerk/nextjs";
+import { useUserProfile } from "@/hooks/use-user-profile";
+import ProfileBanner from "@/components/profile-banner";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import LanguageSwitcher from "@/components/language-switcher";
@@ -34,6 +36,7 @@ interface LayoutDashboardProps {
 
 export default function LayoutDashboard({ children }: LayoutDashboardProps) {
   const { user } = useUser();
+  const { needsProfileSetup, isProfileComplete } = useUserProfile();
   const t = useTranslations("dashboard");
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -97,7 +100,7 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
         <div className="min-h-screen bg-muted flex flex-col">
           {/* Top Navigation */}
           <header className="mb-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between h-16">
                 {/* Logo and Mobile Menu Button */}
                 <div className="flex items-center">
@@ -144,7 +147,7 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
           </header>
 
           {/* Main Container */}
-          <div className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8 w-full">
+          <div className="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8 w-full">
             <div className="flex gap-4 md:gap-8 relative h-full">
               {/* Mobile Sidebar Overlay */}
               {isSidebarOpen && (
@@ -233,13 +236,16 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
               </aside>
 
               {/* Main Content Area */}
-              <main className="flex-1 min-w-0 p-2 md:p-0">{children}</main>
+              <main className="flex-1 min-w-0 p-2 md:p-0">
+                {(needsProfileSetup || !isProfileComplete) && <ProfileBanner />}
+                {children}
+              </main>
             </div>
           </div>
 
           {/* Footer */}
           <footer className="border-t mt-auto">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
               <div className="flex items-center justify-between">
                 {/* Left side */}
                 <div className="flex items-center space-x-4">
