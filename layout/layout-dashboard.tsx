@@ -17,7 +17,6 @@ import {
   BarChart3,
   Settings,
   Zap,
-  Users,
   DollarSign,
   FileText,
   Phone,
@@ -25,6 +24,7 @@ import {
   Bell,
   Menu,
   X,
+  Info,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -68,15 +68,15 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
     { type: "separator" },
     {
       type: "item",
-      icon: Phone,
-      label: t("navigation.contactUs"),
-      href: "/contact",
-    },
-    {
-      type: "item",
       icon: Settings,
       label: t("navigation.settings"),
       href: "/settings",
+    },
+    {
+      type: "item",
+      icon: Info,
+      label: t("navigation.support"),
+      href: "/support",
     },
   ];
 
@@ -219,7 +219,7 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
                         href={item?.href ?? ""}
                         className={`flex items-center px-4 py-2 text-sm rounded-lg transition-colors ${
                           active
-                            ? "bg-primary text-primary-foreground"
+                            ? "bg-gray-300 text-primary-600 font-semibold"
                             : "text-gray-600 hover:bg-gray-200 hover:text-gray-900"
                         }`}
                         onClick={() => setIsSidebarOpen(false)} // Close sidebar on mobile when clicking menu item

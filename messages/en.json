@@ -41,7 +41,7 @@
         "description": "Smart assistant for content creation"
       },
       "smartScheduling": {
-        "title": "Smart Scheduling", 
+        "title": "Smart Scheduling",
         "description": "Automated content calendar planning"
       },
       "whatsappIntegration": {
@@ -65,7 +65,7 @@
       "myProjects": "My Projects",
       "services": "Services",
       "billing": "Billing",
-      "contactUs": "Contact Us",
+      "support": "Support",
       "settings": "Settings"
     },
     "footer": {
