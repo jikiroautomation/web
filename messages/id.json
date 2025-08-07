@@ -73,6 +73,11 @@
       "privacyPolicy": "Kebijakan Privasi",
       "termsOfService": "Syarat Layanan",
       "support": "Dukungan"
+    },
+    "profileBanner": {
+      "title": "Lengkapi Profile Anda",
+      "description": "Silakan lengkapi informasi profile Anda untuk pengalaman yang lebih baik.",
+      "completeNow": "Lengkapi Sekarang"
     }
   }
 }

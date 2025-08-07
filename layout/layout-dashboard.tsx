@@ -29,6 +29,7 @@ import {
   Info,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
+import NavbarApp from "@/components/navbar-app";
 
 interface LayoutDashboardProps {
   children: ReactNode;
@@ -99,55 +100,26 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
       <SignedIn>
         <div className="min-h-screen bg-muted flex flex-col">
           {/* Top Navigation */}
-          <header className="mb-10">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex items-center justify-between h-16">
-                {/* Logo and Mobile Menu Button */}
-                <div className="flex items-center">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="md:hidden mr-2 text-gray-300 hover:text-white"
-                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                  >
-                    <Menu className="w-5 h-5" />
-                  </Button>
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                      <span className="text-white font-bold text-sm">J</span>
-                    </div>
-                  </div>
-                </div>
 
-                {/* Right side */}
-                <div className="flex items-center space-x-2 md:space-x-4">
-                  <div className="hidden sm:block">
-                    <LanguageSwitcher />
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-gray-300 hover:text-white"
-                  >
-                    <Bell className="w-4 h-4" />
-                  </Button>
-                  <UserButton
-                    appearance={{
-                      elements: {
-                        avatarBox: "w-8 h-8",
-                        userButtonPopoverCard: "bg-gray-800 border-gray-700",
-                        userButtonPopoverActionButton:
-                          "text-gray-300 hover:text-white hover:bg-gray-700",
-                      },
-                    }}
-                  />
-                </div>
+          <div className="relative">
+            <NavbarApp
+              isSidebarOpen={isSidebarOpen}
+              setIsSidebarOpen={setIsSidebarOpen}
+            />
+
+            {(needsProfileSetup || !isProfileComplete) && (
+              <div className="max-w-6xl mx-auto px-10">
+                <ProfileBanner />
               </div>
-            </div>
-          </header>
+            )}
+          </div>
 
           {/* Main Container */}
-          <div className="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8 w-full">
+          <div
+            className={`flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8 w-full ${
+              needsProfileSetup || !isProfileComplete ? "" : ""
+            }`}
+          >
             <div className="flex gap-4 md:gap-8 relative h-full">
               {/* Mobile Sidebar Overlay */}
               {isSidebarOpen && (
@@ -180,7 +152,7 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <h3 className="text-gray-700 font-semibold">
+                      <h3 className="text-gray-700 font-semibold dark:text-gray-200">
                         {user?.fullName || user?.firstName || "User"}
                       </h3>
                       <p className="text-gray-400 text-xs">
@@ -209,7 +181,7 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
                       return (
                         <div
                           key={`separator-${index}`}
-                          className="border-t border-gray-300 my-2"
+                          className="border-t border-neutral-300 dark:border-neutral-700 my-2"
                         />
                       );
                     }
@@ -222,8 +194,8 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
                         href={item?.href ?? ""}
                         className={`flex items-center px-4 py-2 text-sm rounded-lg transition-colors ${
                           active
-                            ? "bg-gray-300 text-primary-600 font-semibold"
-                            : "text-gray-600 hover:bg-gray-200 hover:text-gray-900"
+                            ? "bg-neutral-300 dark:bg-neutral-700 text-primary-600 font-semibold"
+                            : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 hover:text-neutral-900 dark:hover:bg-neutral-700"
                         }`}
                         onClick={() => setIsSidebarOpen(false)} // Close sidebar on mobile when clicking menu item
                       >
@@ -236,10 +208,7 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
               </aside>
 
               {/* Main Content Area */}
-              <main className="flex-1 min-w-0 p-2 md:p-0">
-                {(needsProfileSetup || !isProfileComplete) && <ProfileBanner />}
-                {children}
-              </main>
+              <main className="flex-1 min-w-0 p-2 md:p-0">{children}</main>
             </div>
           </div>
 

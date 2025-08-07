@@ -73,6 +73,11 @@
       "privacyPolicy": "Privacy Policy",
       "termsOfService": "Terms of Service",
       "support": "Support"
+    },
+    "profileBanner": {
+      "title": "Complete Your Profile",
+      "description": "Please complete your profile information for a better experience.",
+      "completeNow": "Complete Now"
     }
   }
 }
