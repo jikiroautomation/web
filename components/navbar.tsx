@@ -8,8 +8,7 @@ import LanguageSwitcher from "@/components/language-switcher";
 import { useTranslations } from "next-intl";
 
 export default function Navbar() {
-  const t = useTranslations('navigation');
-  const tCommon = useTranslations('common');
+  const tCommon = useTranslations("common");
   const [isOpen, setIsOpen] = useState(false);
 
   const navigation = [
@@ -23,7 +22,7 @@ export default function Navbar() {
   useEffect(() => {
     const theme = localStorage.getItem("theme");
     const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)",
     ).matches;
 
     if (theme === "dark" || (!theme && systemPrefersDark)) {
@@ -94,7 +93,7 @@ export default function Navbar() {
               asChild
               className="bg-white/10 dark:bg-black/10 text-gray-900 dark:text-white border border-gray-200/20 dark:border-gray-800/20 hover:bg-white/20 dark:hover:bg-black/20 backdrop-blur-sm shadow-sm"
             >
-              <Link href="/sign-in">{tCommon('login')}</Link>
+              <Link href="/sign-in">{tCommon("login")}</Link>
             </Button>
           </div>
 
@@ -146,7 +145,7 @@ export default function Navbar() {
                   className="w-full bg-white/10 dark:bg-black/10 text-gray-900 dark:text-white border border-gray-200/20 dark:border-gray-800/20 hover:bg-white/20 dark:hover:bg-black/20 backdrop-blur-sm shadow-sm"
                 >
                   <Link href="/sign-in" onClick={() => setIsOpen(false)}>
-                    {tCommon('login')}
+                    {tCommon("login")}
                   </Link>
                 </Button>
               </div>
