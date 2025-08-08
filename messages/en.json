@@ -82,5 +82,21 @@
       "description": "Please complete your profile information for a better experience.",
       "completeNow": "Complete Now"
     }
+  },
+  "services": {
+    "management": {
+      "title": "Services Management",
+      "description": "Manage and organize all services offered to your clients",
+      "createService": "Create Service",
+      "searchPlaceholder": "Search services...",
+      "sortBy": "Sort by...",
+      "sortByName": "Sort by Name",
+      "sortByNewest": "Newest First",
+      "sortByOldest": "Oldest First",
+      "noServicesFound": "No Services Found",
+      "noServicesMatch": "No services match your search criteria.",
+      "getStarted": "Get started by creating your first service.",
+      "createFirst": "Create First Service"
+    }
   }
 }

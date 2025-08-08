@@ -82,5 +82,21 @@
       "description": "Silakan lengkapi informasi profile Anda untuk pengalaman yang lebih baik.",
       "completeNow": "Lengkapi Sekarang"
     }
+  },
+  "services": {
+    "management": {
+      "title": "Manajemen Layanan",
+      "description": "Kelola dan atur semua layanan yang ditawarkan kepada klien",
+      "createService": "Buat Layanan",
+      "searchPlaceholder": "Cari layanan...",
+      "sortBy": "Urutkan berdasarkan...",
+      "sortByName": "Nama",
+      "sortByNewest": "Terbaru",
+      "sortByOldest": "Terlama",
+      "noServicesFound": "Tidak Ada Layanan",
+      "noServicesMatch": "Tidak ada layanan yang cocok dengan kriteria pencarian Anda.",
+      "getStarted": "Mulai dengan membuat layanan pertama Anda.",
+      "createFirst": "Buat Layanan Pertama"
+    }
   }
 }
