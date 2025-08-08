@@ -101,6 +101,14 @@
       "noServicesMatch": "No services match your search criteria.",
       "getStarted": "Get started by creating your first service.",
       "createFirst": "Create First Service"
+    },
+    "public": {
+      "title": "Our Services",
+      "description": "Discover all the services we offer to help you succeed",
+      "noServicesFound": "No services found",
+      "noServicesAvailable": "No Services Available",
+      "noServicesMatchDescription": "No services match your search criteria. Try adjusting your search terms.",
+      "noServicesAvailableDescription": "There are currently no services available. Please check back later."
     }
   }
 }

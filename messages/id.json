@@ -101,6 +101,14 @@
       "noServicesMatch": "Tidak ada layanan yang cocok dengan kriteria pencarian Anda.",
       "getStarted": "Mulai dengan membuat layanan pertama Anda.",
       "createFirst": "Buat Layanan Pertama"
+    },
+    "public": {
+      "title": "Layanan Kami",
+      "description": "Temukan semua layanan yang kami tawarkan untuk membantu Anda sukses",
+      "noServicesFound": "Layanan tidak ditemukan",
+      "noServicesAvailable": "Tidak Ada Layanan Tersedia",
+      "noServicesMatchDescription": "Tidak ada layanan yang cocok dengan kriteria pencarian Anda. Coba sesuaikan kata kunci pencarian.",
+      "noServicesAvailableDescription": "Saat ini belum ada layanan yang tersedia. Silakan cek kembali nanti."
     }
   }
 }
