@@ -3,28 +3,18 @@
 import { ReactNode, useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import {
-  useUser,
-  UserButton,
-  SignedIn,
-  SignedOut,
-  RedirectToSignIn,
-} from "@clerk/nextjs";
+import { useUser, SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
 import { useUserProfile } from "@/hooks/use-user-profile";
 import ProfileBanner from "@/components/profile-banner";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import LanguageSwitcher from "@/components/language-switcher";
 import {
   BarChart3,
   Settings,
   Zap,
   DollarSign,
   FileText,
-  Phone,
   User,
-  Bell,
-  Menu,
   X,
   Info,
 } from "lucide-react";
