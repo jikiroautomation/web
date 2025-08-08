@@ -14,7 +14,9 @@
     "back": "Kembali",
     "next": "Selanjutnya",
     "previous": "Sebelumnya",
-    "submit": "Kirim"
+    "submit": "Kirim",
+    "create": "Buat",
+    "update": "Perbarui"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -88,6 +90,8 @@
       "title": "Manajemen Layanan",
       "description": "Kelola dan atur semua layanan yang ditawarkan kepada klien",
       "createService": "Buat Layanan",
+      "updateService": "Perbarui Layanan",
+      "deleteService": "Hapus Layanan",
       "searchPlaceholder": "Cari layanan...",
       "sortBy": "Urutkan berdasarkan...",
       "sortByName": "Nama",

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useQuery } from "convex/react";
+import { Toaster } from "sonner";
 import { api } from "../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,10 +16,38 @@ import {
 } from "@/components/ui/select";
 import { Plus, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
+import ServiceDialog from "@/components/dialogs/ServiceDialog";
+import DeleteConfirmDialog from "@/components/dialogs/DeleteConfirmDialog";
+import ServiceItem from "./ServiceItem";
+
+interface Service {
+  _id: string;
+  name: string;
+  description: string;
+  emoji: string;
+  createdAt: number;
+  updatedAt: number;
+}
 
 const ServicesAdminView = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("name");
+  const [serviceDialog, setServiceDialog] = useState<{
+    isOpen: boolean;
+    mode: "create" | "update";
+    service?: Service;
+  }>({
+    isOpen: false,
+    mode: "create",
+  });
+  const [deleteDialog, setDeleteDialog] = useState<{
+    isOpen: boolean;
+    service: Service | null;
+  }>({
+    isOpen: false,
+    service: null,
+  });
+
   const t = useTranslations("services.management");
   const tCommon = useTranslations("common");
 
@@ -39,8 +68,39 @@ const ServicesAdminView = () => {
     });
 
   const handleCreateService = () => {
-    // TODO: Open create service dialog
-    console.log("Create service clicked");
+    setServiceDialog({
+      isOpen: true,
+      mode: "create",
+    });
+  };
+
+  const handleEditService = (service: Service) => {
+    setServiceDialog({
+      isOpen: true,
+      mode: "update",
+      service,
+    });
+  };
+
+  const handleDeleteService = (service: Service) => {
+    setDeleteDialog({
+      isOpen: true,
+      service,
+    });
+  };
+
+  const closeServiceDialog = () => {
+    setServiceDialog({
+      isOpen: false,
+      mode: "create",
+    });
+  };
+
+  const closeDeleteDialog = () => {
+    setDeleteDialog({
+      isOpen: false,
+      service: null,
+    });
   };
 
   return (
@@ -110,33 +170,32 @@ const ServicesAdminView = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredServices.map((service) => (
-            <Card
+            <ServiceItem
               key={service._id}
-              className="hover:shadow-lg transition-shadow cursor-pointer"
-            >
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div className="text-2xl">{service.emoji}</div>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm">
-                      {tCommon("edit")}
-                    </Button>
-                    <Button variant="destructive" size="sm">
-                      {tCommon("delete")}
-                    </Button>
-                  </div>
-                </div>
-                <CardTitle className="text-lg">{service.name}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-sm line-clamp-3">
-                  {service.description}
-                </p>
-              </CardContent>
-            </Card>
+              service={service}
+              onEdit={handleEditService}
+              onDelete={handleDeleteService}
+            />
           ))}
         </div>
       )}
+
+      {/* Dialogs */}
+      <ServiceDialog
+        isOpen={serviceDialog.isOpen}
+        onClose={closeServiceDialog}
+        service={serviceDialog.service}
+        mode={serviceDialog.mode}
+      />
+
+      <DeleteConfirmDialog
+        isOpen={deleteDialog.isOpen}
+        onClose={closeDeleteDialog}
+        service={deleteDialog.service}
+      />
+
+      {/* Toast Container */}
+      <Toaster richColors position="top-right" />
     </div>
   );
 };

@@ -14,7 +14,9 @@
     "back": "Back",
     "next": "Next",
     "previous": "Previous",
-    "submit": "Submit"
+    "submit": "Submit",
+    "create": "Create",
+    "update": "Update"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -88,6 +90,8 @@
       "title": "Services Management",
       "description": "Manage and organize all services offered to your clients",
       "createService": "Create Service",
+      "updateService": "Update Service",
+      "deleteService": "Delete Service",
       "searchPlaceholder": "Search services...",
       "sortBy": "Sort by...",
       "sortByName": "Sort by Name",
