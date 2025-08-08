@@ -16,9 +16,10 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { api } from "../../convex/_generated/api";
+import { Id } from "../../convex/_generated/dataModel";
 
 interface Service {
-  _id: string;
+  _id: Id<"services">;
   name: string;
   description: string;
   emoji: string;

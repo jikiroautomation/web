@@ -5,7 +5,7 @@ import { useQuery } from "convex/react";
 import { Toaster } from "sonner";
 import { api } from "../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -19,9 +19,10 @@ import { useTranslations } from "next-intl";
 import ServiceDialog from "@/components/dialogs/ServiceDialog";
 import DeleteConfirmDialog from "@/components/dialogs/DeleteConfirmDialog";
 import ServiceItem from "./ServiceItem";
+import { Id } from "../../convex/_generated/dataModel";
 
 interface Service {
-  _id: string;
+  _id: Id<"services">;
   name: string;
   description: string;
   emoji: string;
@@ -108,12 +109,8 @@ const ServicesAdminView = () => {
       {/* Section 1: Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="space-y-1">
-          <h1 className="text-xl font-bold tracking-tight">
-            {t("title")}
-          </h1>
-          <p className="text-muted-foreground text-xs">
-            {t("description")}
-          </p>
+          <h1 className="text-xl font-bold tracking-tight">{t("title")}</h1>
+          <p className="text-muted-foreground text-xs">{t("description")}</p>
         </div>
         <Button
           onClick={handleCreateService}
@@ -152,11 +149,11 @@ const ServicesAdminView = () => {
         <Card className="w-full">
           <CardContent className="flex flex-col items-center justify-center py-16 text-center">
             <div className="text-6xl mb-4">📋</div>
-            <h3 className="text-lg font-semibold mb-2">{t("noServicesFound")}</h3>
+            <h3 className="text-lg font-semibold mb-2">
+              {t("noServicesFound")}
+            </h3>
             <p className="text-muted-foreground mb-6">
-              {searchTerm
-                ? t("noServicesMatch")
-                : t("getStarted")}
+              {searchTerm ? t("noServicesMatch") : t("getStarted")}
             </p>
             <Button
               onClick={handleCreateService}

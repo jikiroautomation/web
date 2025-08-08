@@ -12,9 +12,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal, Edit, Trash2, Eye } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Id } from "../../convex/_generated/dataModel";
 
 interface Service {
-  _id: string;
+  _id: Id<"services">;
   name: string;
   description: string;
   emoji: string;

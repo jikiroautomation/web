@@ -20,9 +20,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { api } from "../../convex/_generated/api";
+import { Id } from "../../convex/_generated/dataModel";
 
 interface Service {
-  _id: string;
+  _id: Id<"services">;
   name: string;
   description: string;
   emoji: string;
@@ -121,7 +122,7 @@ export default function ServiceDialog({
     }
   };
 
-  const handleEmojiSelect = (emojiObject: any) => {
+  const handleEmojiSelect = (emojiObject: { emoji: string }) => {
     setEmoji(emojiObject.emoji);
     setShowEmojiPicker(false);
   };
