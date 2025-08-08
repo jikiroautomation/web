@@ -37,7 +37,7 @@ interface LayoutDashboardProps {
 
 export default function LayoutDashboard({ children }: LayoutDashboardProps) {
   const { user } = useUser();
-  const { needsProfileSetup, isProfileComplete } = useUserProfile();
+  const { needsProfileSetup, isProfileComplete, isLoading } = useUserProfile();
   const t = useTranslations("dashboard");
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -107,7 +107,7 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
               setIsSidebarOpen={setIsSidebarOpen}
             />
 
-            {(needsProfileSetup || !isProfileComplete) && (
+            {!isLoading && (needsProfileSetup || !isProfileComplete) && (
               <div className="max-w-6xl mx-auto px-10">
                 <ProfileBanner />
               </div>
