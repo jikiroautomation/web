@@ -18,4 +18,12 @@ export default defineSchema({
     createdAt: v.number(),
     updatedAt: v.number(),
   }).index("by_clerk_id", ["clerkId"]),
+  services: defineTable({
+    name: v.string(),
+    description: v.string(),
+    emoji: v.string(),
+    isNew: v.optional(v.boolean()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }).index("by_name", ["name"]),
 });
