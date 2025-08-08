@@ -7,6 +7,7 @@ export const upsertUser = mutation({
     email: v.string(),
     name: v.optional(v.string()),
     phone: v.optional(v.string()),
+    role: v.optional(v.union(v.literal("user"), v.literal("admin"))),
   },
   handler: async (ctx, args) => {
     const existingUser = await ctx.db
@@ -22,6 +23,7 @@ export const upsertUser = mutation({
         email: args.email,
         name: args.name,
         phone: args.phone,
+        role: args.role || existingUser.role,
         updatedAt: now,
       });
       return existingUser._id;
@@ -32,6 +34,7 @@ export const upsertUser = mutation({
         email: args.email,
         name: args.name,
         phone: args.phone,
+        role: args.role || "user",
         createdAt: now,
         updatedAt: now,
       });
@@ -92,9 +95,27 @@ export const updateUser = mutation({
     await ctx.db.patch(user._id, {
       name: args.name,
       phone: args.phone,
+      role: "user",
       updatedAt: Date.now(),
     });
 
     return user._id;
+  },
+});
+
+export const isUserAdmin = query({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      return false;
+    }
+
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerk_id", (q) => q.eq("clerkId", identity.subject))
+      .unique();
+
+    return user?.role === "admin";
   },
 });

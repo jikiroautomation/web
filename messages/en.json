@@ -66,7 +66,10 @@
       "services": "Services",
       "billing": "Billing",
       "support": "Support",
-      "settings": "Settings"
+      "settings": "Settings",
+      "users": "Users",
+      "income": "Income",
+      "helpdesk": "Helpdesk"
     },
     "footer": {
       "allRightsReserved": "All rights reserved",

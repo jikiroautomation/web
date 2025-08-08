@@ -82,8 +82,10 @@ const SettingsView = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-gray-900">Pengaturan Profile</h1>
-        <p className="text-gray-600 mt-2 text-xs">
+        <h1 className="text-xl font-bold text-neutral-900 dark:text-neutral-200">
+          Pengaturan Profile
+        </h1>
+        <p className="text-neutral-600 mt-2 text-xs dark:text-neutral-400">
           Kelola informasi profile dan preferensi akun Anda.
         </p>
       </div>
@@ -103,8 +105,10 @@ const SettingsView = () => {
 
       <Card className="p-6">
         <div className="mb-6">
-          <h2 className="text-lg font-semibold mb-2">Informasi Profile</h2>
-          <p className="text-xs text-gray-600">
+          <h2 className="text-lg font-semibold mb-2 dark:text-neutral-200">
+            Informasi Profile
+          </h2>
+          <p className="text-xs text-neutral-600 dark:text-neutral-400">
             Lengkapi informasi dasar profile Anda.
           </p>
         </div>
@@ -113,15 +117,15 @@ const SettingsView = () => {
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Mail className="absolute left-3 top-3 h-4 w-4 text-neutral-400 dark:text-neutral-700" />
               <Input
                 id="email"
                 value={user?.primaryEmailAddress?.emailAddress || ""}
                 disabled
-                className="pl-10 bg-gray-50"
+                className="pl-10 bg-neutral-50 dark:text-neutral-700"
               />
             </div>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-neutral-500">
               Email dikelola oleh sistem authentication dan tidak dapat diubah.
             </p>
           </div>
@@ -129,7 +133,7 @@ const SettingsView = () => {
           <div className="space-y-2">
             <Label htmlFor="name">Nama Lengkap *</Label>
             <div className="relative">
-              <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <User className="absolute left-3 top-3 h-4 w-4 text-neutral-400" />
               <Input
                 id="name"
                 name="name"
@@ -145,7 +149,7 @@ const SettingsView = () => {
           <div className="space-y-2">
             <Label htmlFor="phone">Nomor Telepon *</Label>
             <div className="relative">
-              <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Phone className="absolute left-3 top-3 h-4 w-4 text-neutral-400" />
               <Input
                 id="phone"
                 name="phone"
@@ -157,7 +161,7 @@ const SettingsView = () => {
                 required
               />
             </div>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-neutral-500">
               Format: +62 diikuti nomor telepon (contoh: +6281234567890)
             </p>
           </div>

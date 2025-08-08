@@ -66,7 +66,10 @@
       "services": "Layanan",
       "billing": "Tagihan",
       "support": "Dukungan",
-      "settings": "Pengaturan"
+      "settings": "Pengaturan",
+      "users": "Pengguna",
+      "income": "Pendapatan",
+      "helpdesk": "Pusat Bantuan"
     },
     "footer": {
       "allRightsReserved": "Hak cipta dilindungi",

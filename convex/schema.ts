@@ -14,6 +14,7 @@ export default defineSchema({
     email: v.string(),
     name: v.optional(v.string()),
     phone: v.optional(v.string()),
+    role: v.union(v.literal("user"), v.literal("admin")),
     createdAt: v.number(),
     updatedAt: v.number(),
   }).index("by_clerk_id", ["clerkId"]),

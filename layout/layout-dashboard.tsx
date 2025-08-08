@@ -8,6 +8,8 @@ import { useUserProfile } from "@/hooks/use-user-profile";
 import ProfileBanner from "@/components/profile-banner";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import {
   BarChart3,
   Settings,
@@ -17,6 +19,9 @@ import {
   User,
   X,
   Info,
+  Shield,
+  Users,
+  HelpCircle,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import NavbarApp from "@/components/navbar-app";
@@ -28,51 +33,101 @@ interface LayoutDashboardProps {
 export default function LayoutDashboard({ children }: LayoutDashboardProps) {
   const { user } = useUser();
   const { needsProfileSetup, isProfileComplete, isLoading } = useUserProfile();
+  const isAdmin = useQuery(api.users.isUserAdmin);
   const t = useTranslations("dashboard");
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const menuItems = [
-    {
-      type: "item",
-      icon: BarChart3,
-      label: t("navigation.overview"),
-      href: "/dashboard",
-    },
-    { type: "separator" },
-    {
-      type: "item",
-      icon: FileText,
-      label: t("navigation.myProjects"),
-      href: "/projects",
-    },
-    {
-      type: "item",
-      icon: Zap,
-      label: t("navigation.services"),
-      href: "/services",
-    },
-    { type: "separator" },
-    {
-      type: "item",
-      icon: DollarSign,
-      label: t("navigation.billing"),
-      href: "/billing",
-    },
-    { type: "separator" },
-    {
-      type: "item",
-      icon: Settings,
-      label: t("navigation.settings"),
-      href: "/settings",
-    },
-    {
-      type: "item",
-      icon: Info,
-      label: t("navigation.support"),
-      href: "/support",
-    },
-  ];
+  const getMenuItems = () => {
+    if (isAdmin) {
+      // Admin menu items
+      return [
+        {
+          type: "item",
+          icon: BarChart3,
+          label: t("navigation.overview"),
+          href: "/dashboard",
+        },
+        { type: "separator" },
+        {
+          type: "item",
+          icon: Zap,
+          label: t("navigation.services"),
+          href: "/admin/services",
+        },
+        {
+          type: "item",
+          icon: Users,
+          label: t("navigation.users"),
+          href: "/admin/users",
+        },
+        {
+          type: "item",
+          icon: DollarSign,
+          label: t("navigation.income"),
+          href: "/admin/income",
+        },
+        { type: "separator" },
+        {
+          type: "item",
+          icon: Settings,
+          label: t("navigation.settings"),
+          href: "/settings",
+        },
+        {
+          type: "item",
+          icon: HelpCircle,
+          label: t("navigation.helpdesk"),
+          href: "/admin/helpdesk",
+        },
+      ];
+    } else {
+      // Regular user menu items
+      return [
+        {
+          type: "item",
+          icon: BarChart3,
+          label: t("navigation.overview"),
+          href: "/dashboard",
+        },
+        { type: "separator" },
+        {
+          type: "item",
+          icon: FileText,
+          label: t("navigation.myProjects"),
+          href: "/projects",
+        },
+        {
+          type: "item",
+          icon: Zap,
+          label: t("navigation.services"),
+          href: "/services",
+        },
+        { type: "separator" },
+        {
+          type: "item",
+          icon: DollarSign,
+          label: t("navigation.billing"),
+          href: "/billing",
+        },
+        { type: "separator" },
+        {
+          type: "item",
+          icon: Settings,
+          label: t("navigation.settings"),
+          href: "/settings",
+        },
+        {
+          type: "item",
+          icon: Info,
+          label: t("navigation.support"),
+          href: "/support",
+        },
+      ];
+    }
+  };
+
+  const menuItems = getMenuItems();
 
   const isActive = (href: string) => {
     // Remove locale prefix from pathname (e.g., "/en/dashboard" -> "/dashboard")
@@ -114,7 +169,7 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
               {/* Mobile Sidebar Overlay */}
               {isSidebarOpen && (
                 <div
-                  className="fixed inset-0 bg-gray-500 opacity-50 z-40 md:hidden"
+                  className="fixed inset-0 bg-neutral-500 opacity-50 z-40 md:hidden"
                   onClick={() => setIsSidebarOpen(false)}
                 />
               )}
@@ -138,14 +193,22 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
                         alt={user?.fullName || user?.firstName || "User"}
                       />
                       <AvatarFallback>
-                        <User className="w-5 h-5 text-gray-600" />
+                        <User className="w-5 h-5 text-neutral-600" />
                       </AvatarFallback>
                     </Avatar>
-                    <div>
-                      <h3 className="text-gray-700 font-semibold dark:text-gray-200">
-                        {user?.fullName || user?.firstName || "User"}
-                      </h3>
-                      <p className="text-gray-400 text-xs">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-neutral-700 font-semibold dark:text-neutral-200 truncate">
+                          {user?.fullName || user?.firstName || "User"}
+                        </h3>
+                        {isAdmin && (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                            <Shield className="w-3 h-3 mr-1" />
+                            Admin
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-neutral-400 text-xs">
                         {user?.primaryEmailAddress?.emailAddress}
                       </p>
                     </div>
@@ -158,7 +221,7 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
                     variant="ghost"
                     size="sm"
                     onClick={() => setIsSidebarOpen(false)}
-                    className="text-gray-300 hover:text-white"
+                    className="text-neutral-300 hover:text-white"
                   >
                     <X className="w-5 h-5" />
                   </Button>
