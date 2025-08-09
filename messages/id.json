@@ -110,5 +110,32 @@
       "noServicesMatchDescription": "Tidak ada layanan yang cocok dengan kriteria pencarian Anda. Coba sesuaikan kata kunci pencarian.",
       "noServicesAvailableDescription": "Saat ini belum ada layanan yang tersedia. Silakan cek kembali nanti."
     }
+  },
+  "users": {
+    "management": {
+      "title": "Manajemen Pengguna",
+      "description": "Kelola pengguna platform dan peran mereka",
+      "searchPlaceholder": "Cari berdasarkan nama atau email...",
+      "filterByRole": "Filter berdasarkan peran",
+      "allRoles": "Semua Peran",
+      "user": "Pengguna",
+      "admin": "Admin",
+      "tableHeaders": {
+        "name": "Nama",
+        "email": "Email",
+        "phone": "Telepon",
+        "role": "Peran",
+        "createdAt": "Dibuat Pada"
+      },
+      "noName": "Tidak ada nama",
+      "noPhone": "Tidak ada telepon",
+      "noUsersFound": "Tidak ada pengguna ditemukan.",
+      "pagination": {
+        "showing": "Menampilkan",
+        "to": "hingga",
+        "of": "dari",
+        "users": "pengguna"
+      }
+    }
   }
 }

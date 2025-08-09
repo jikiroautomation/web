@@ -110,5 +110,32 @@
       "noServicesMatchDescription": "No services match your search criteria. Try adjusting your search terms.",
       "noServicesAvailableDescription": "There are currently no services available. Please check back later."
     }
+  },
+  "users": {
+    "management": {
+      "title": "User Management",
+      "description": "Manage platform users and their roles",
+      "searchPlaceholder": "Search by name or email...",
+      "filterByRole": "Filter by role",
+      "allRoles": "All Roles",
+      "user": "User",
+      "admin": "Admin",
+      "tableHeaders": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "role": "Role",
+        "createdAt": "Created At"
+      },
+      "noName": "No name",
+      "noPhone": "No phone",
+      "noUsersFound": "No users found.",
+      "pagination": {
+        "showing": "Showing",
+        "to": "to",
+        "of": "of",
+        "users": "users"
+      }
+    }
   }
 }
