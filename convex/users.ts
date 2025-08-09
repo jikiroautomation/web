@@ -119,3 +119,43 @@ export const isUserAdmin = query({
     return user?.role === "admin";
   },
 });
+
+export const getAllUsers = query({
+  args: {
+    search: v.optional(v.string()),
+    role: v.optional(v.union(v.literal("user"), v.literal("admin"))),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new ConvexError("User not authenticated");
+    }
+
+    const currentUser = await ctx.db
+      .query("users")
+      .withIndex("by_clerk_id", (q) => q.eq("clerkId", identity.subject))
+      .unique();
+
+    if (currentUser?.role !== "admin") {
+      throw new ConvexError("Unauthorized");
+    }
+
+    let query = ctx.db.query("users");
+
+    if (args.role) {
+      query = query.filter((q) => q.eq(q.field("role"), args.role));
+    }
+
+    let users = await query.collect();
+
+    if (args.search) {
+      const searchLower = args.search.toLowerCase();
+      users = users.filter((user) => 
+        (user.name && user.name.toLowerCase().includes(searchLower)) ||
+        user.email.toLowerCase().includes(searchLower)
+      );
+    }
+
+    return users;
+  },
+});
