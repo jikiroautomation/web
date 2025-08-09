@@ -1,6 +1,13 @@
+import { Metadata } from "next";
 import Home from "./inner";
 import { preloadQuery, preloadedQueryResult } from "convex/nextjs";
 import { api } from "@/convex/_generated/api";
+
+export const metadata: Metadata = {
+  title: "Server Demo - JIKIRO",
+  description: "Convex + Next.js server-side rendering demo on JIKIRO platform.",
+  robots: "noindex, nofollow",
+};
 
 export default async function ServerPage() {
   const preloaded = await preloadQuery(api.myFunctions.listNumbers, {

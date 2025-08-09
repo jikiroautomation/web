@@ -1,6 +1,13 @@
+import { Metadata } from "next";
 import LayoutMain from "@/layout/layout-main";
 import { SignIn } from "@clerk/nextjs";
 import { getTranslations } from "next-intl/server";
+
+export const metadata: Metadata = {
+  title: "Sign In - JIKIRO",
+  description: "Sign in to your JIKIRO account to access your dashboard and manage your professional services.",
+  robots: "noindex, nofollow",
+};
 
 export default async function SignInPage() {
   const t = await getTranslations("auth");

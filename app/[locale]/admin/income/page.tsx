@@ -1,3 +1,11 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Income Management - Admin | JIKIRO",
+  description: "Monitor platform revenue and financial metrics. Admin dashboard for income analytics and management on JIKIRO.",
+  robots: "noindex, nofollow",
+};
+
 export default function AdminIncomePage() {
   return (
     <div className="space-y-6">

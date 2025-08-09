@@ -1,9 +1,16 @@
+import { Metadata } from "next";
 import LayoutDashboard from "@/layout/layout-dashboard";
 import DashboardUserView from "@/view/dashboard-user";
 import DashboardAdminView from "@/view/dashboard-admin";
 import { currentUser, auth } from "@clerk/nextjs/server";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
+
+export const metadata: Metadata = {
+  title: "Dashboard - JIKIRO",
+  description: "Access your JIKIRO dashboard to manage projects, view analytics, and oversee your business operations.",
+  robots: "noindex, nofollow",
+};
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
