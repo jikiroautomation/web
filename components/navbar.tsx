@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import LanguageSwitcher from "@/components/language-switcher";
 import { useTranslations } from "next-intl";
+import { useAuth } from "@clerk/nextjs";
 
 export default function Navbar() {
   const tCommon = useTranslations("common");
+  const { isSignedIn } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const navigation = [
@@ -93,7 +95,11 @@ export default function Navbar() {
               asChild
               className="bg-white/10 dark:bg-black/10 text-gray-900 dark:text-white border border-gray-200/20 dark:border-gray-800/20 hover:bg-white/20 dark:hover:bg-black/20 backdrop-blur-sm shadow-sm"
             >
-              <Link href="/sign-in">{tCommon("login")}</Link>
+              {isSignedIn ? (
+                <Link href="/dashboard">Dashboard</Link>
+              ) : (
+                <Link href="/sign-in">{tCommon("login")}</Link>
+              )}
             </Button>
           </div>
 
@@ -144,9 +150,15 @@ export default function Navbar() {
                   asChild
                   className="w-full bg-white/10 dark:bg-black/10 text-gray-900 dark:text-white border border-gray-200/20 dark:border-gray-800/20 hover:bg-white/20 dark:hover:bg-black/20 backdrop-blur-sm shadow-sm"
                 >
-                  <Link href="/sign-in" onClick={() => setIsOpen(false)}>
-                    {tCommon("login")}
-                  </Link>
+                  {isSignedIn ? (
+                    <Link href="/dashboard" onClick={() => setIsOpen(false)}>
+                      Dashboard
+                    </Link>
+                  ) : (
+                    <Link href="/sign-in" onClick={() => setIsOpen(false)}>
+                      {tCommon("login")}
+                    </Link>
+                  )}
                 </Button>
               </div>
             </div>
