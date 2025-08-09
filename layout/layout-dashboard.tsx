@@ -64,8 +64,8 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
         {
           type: "item",
           icon: DollarSign,
-          label: t("navigation.income"),
-          href: "/admin/income",
+          label: t("navigation.revenue"),
+          href: "/admin/revenue",
         },
         { type: "separator" },
         {
