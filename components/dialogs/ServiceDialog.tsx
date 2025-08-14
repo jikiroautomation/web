@@ -5,7 +5,6 @@ import { useMutation } from "convex/react";
 import { toast } from "sonner";
 import EmojiPicker from "emoji-picker-react";
 import { Loader2, Smile } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 import {
   Dialog,
@@ -48,9 +47,6 @@ export default function ServiceDialog({
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const t = useTranslations("services.management");
-  const tCommon = useTranslations("common");
-
   const createService = useMutation(api.services.createService);
   const updateService = useMutation(api.services.updateService);
 
@@ -90,7 +86,7 @@ export default function ServiceDialog({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setIsLoading(true);
@@ -112,7 +108,7 @@ export default function ServiceDialog({
         });
         toast.success("Service updated successfully!");
       }
-      
+
       onClose();
     } catch (error) {
       toast.error(`Failed to ${mode} service`);
@@ -132,7 +128,7 @@ export default function ServiceDialog({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
-            {mode === "create" ? t("createService") : t("updateService")}
+            {mode === "create" ? "Create Service" : "Update Service"}
           </DialogTitle>
           <DialogDescription>
             {mode === "create"
@@ -212,11 +208,11 @@ export default function ServiceDialog({
               onClick={onClose}
               disabled={isLoading}
             >
-              {tCommon("cancel")}
+              Cancel
             </Button>
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {mode === "create" ? tCommon("create") : tCommon("update")}
+              {mode === "create" ? "Create" : "Update"}
             </Button>
           </DialogFooter>
         </form>

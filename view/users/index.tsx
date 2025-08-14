@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { useQuery } from "convex/react";
-import { useTranslations } from "next-intl";
 import { api } from "../../convex/_generated/api";
 import { Card, CardContent } from "../../components/ui/card";
 import {
@@ -23,8 +22,6 @@ import {
 import { Input } from "../../components/ui/input";
 
 const UsersView = () => {
-  const t = useTranslations("users.management");
-  const tCommon = useTranslations("common");
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState<"all" | "user" | "admin">("all");
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,10 +48,10 @@ const UsersView = () => {
     <div className="space-y-6">
       <div className="space-y-1">
         <h1 className="text-xl font-bold text-neutral-900 dark:text-white">
-          {t("title")}
+          User Management
         </h1>
         <p className="text-xs text-neutral-600 dark:text-neutral-400">
-          {t("description")}
+          Manage platform users and their roles
         </p>
       </div>
 
@@ -63,7 +60,7 @@ const UsersView = () => {
         <div className="flex-1">
           <Input
             type="text"
-            placeholder={t("searchPlaceholder")}
+            placeholder="Search by name or email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -76,12 +73,12 @@ const UsersView = () => {
             }
           >
             <SelectTrigger className="w-32">
-              <SelectValue placeholder={t("filterByRole")} />
+              <SelectValue placeholder="Filter by role" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">{t("allRoles")}</SelectItem>
-              <SelectItem value="user">{t("user")}</SelectItem>
-              <SelectItem value="admin">{t("admin")}</SelectItem>
+              <SelectItem value="all">All Roles</SelectItem>
+              <SelectItem value="user">User</SelectItem>
+              <SelectItem value="admin">Admin</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -93,19 +90,19 @@ const UsersView = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>{t("tableHeaders.name")}</TableHead>
-                <TableHead>{t("tableHeaders.email")}</TableHead>
-                <TableHead>{t("tableHeaders.phone")}</TableHead>
-                <TableHead>{t("tableHeaders.role")}</TableHead>
-                <TableHead>{t("tableHeaders.createdAt")}</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Phone</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Created At</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {paginatedUsers.map((user) => (
                 <TableRow key={user._id}>
-                  <TableCell>{user.name || t("noName")}</TableCell>
+                  <TableCell>{user.name || "No name"}</TableCell>
                   <TableCell>{user.email}</TableCell>
-                  <TableCell>{user.phone || t("noPhone")}</TableCell>
+                  <TableCell>{user.phone || "No phone"}</TableCell>
                   <TableCell>
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -114,7 +111,7 @@ const UsersView = () => {
                           : "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
                       }`}
                     >
-                      {t(user.role)}
+                      {user.role === "admin" ? "Admin" : "User"}
                     </span>
                   </TableCell>
                   <TableCell>{formatDate(user.createdAt)}</TableCell>
@@ -129,9 +126,9 @@ const UsersView = () => {
       {totalPages > 1 && (
         <div className="flex items-center justify-between mt-6">
           <div className="text-sm text-muted-foreground">
-            {t("pagination.showing")} {startIndex + 1} {t("pagination.to")}{" "}
-            {Math.min(startIndex + usersPerPage, filteredUsers.length)} {t("pagination.of")}{" "}
-            {filteredUsers.length} {t("pagination.users")}
+            Showing {startIndex + 1} to{" "}
+            {Math.min(startIndex + usersPerPage, filteredUsers.length)} of{" "}
+            {filteredUsers.length} users
           </div>
           <div className="flex gap-2">
             <button
@@ -139,7 +136,7 @@ const UsersView = () => {
               disabled={currentPage === 1}
               className="px-3 py-1 rounded border border-input disabled:opacity-50 disabled:cursor-not-allowed hover:bg-accent text-foreground"
             >
-              {tCommon("previous")}
+              Previous
             </button>
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
@@ -161,7 +158,7 @@ const UsersView = () => {
               disabled={currentPage === totalPages}
               className="px-3 py-1 rounded border border-input disabled:opacity-50 disabled:cursor-not-allowed hover:bg-accent text-foreground"
             >
-              {tCommon("next")}
+              Next
             </button>
           </div>
         </div>
@@ -170,7 +167,7 @@ const UsersView = () => {
       {/* No users message */}
       {filteredUsers.length === 0 && (
         <div className="text-center py-8 text-muted-foreground">
-          {t("noUsersFound")}
+          No users found.
         </div>
       )}
     </div>

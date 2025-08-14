@@ -3,11 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Info, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { useTranslations } from "next-intl";
 
 export default function ProfileBanner() {
   const [isVisible, setIsVisible] = useState(true);
-  const t = useTranslations("dashboard.profileBanner");
 
   if (!isVisible) return null;
 
@@ -16,9 +14,9 @@ export default function ProfileBanner() {
       <Info className="h-4 w-4 dark:text-neutral-700" />
       <div className="flex items-center justify-between">
         <AlertDescription className="flex-1">
-          <span className="font-medium text-sm">{t("title")}</span>
+          <span className="font-medium text-sm">Lengkapi Profile Anda</span>
           <br />
-          {t("description")}
+          Silakan lengkapi informasi profile Anda untuk pengalaman yang lebih baik.
         </AlertDescription>
         <div className="flex items-center gap-2 ml-4">
           <Link href="/settings">
@@ -26,7 +24,7 @@ export default function ProfileBanner() {
               size="sm"
               className="bg-blue-600 hover:bg-blue-700 dark:text-white"
             >
-              {t("completeNow")}
+              Lengkapi Sekarang
             </Button>
           </Link>
           <Button

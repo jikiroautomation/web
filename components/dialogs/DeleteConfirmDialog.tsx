@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useMutation } from "convex/react";
 import { toast } from "sonner";
 import { Loader2, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 import {
   Dialog,
@@ -37,8 +36,6 @@ export default function DeleteConfirmDialog({
   service,
 }: DeleteConfirmDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const t = useTranslations("services.management");
-  const tCommon = useTranslations("common");
 
   const deleteService = useMutation(api.services.deleteService);
 
@@ -67,7 +64,7 @@ export default function DeleteConfirmDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-red-600">
             <Trash2 className="h-5 w-5" />
-            {t("deleteService")}
+            Delete Service
           </DialogTitle>
           <DialogDescription>
             Are you sure you want to delete this service? This action cannot be
@@ -96,7 +93,7 @@ export default function DeleteConfirmDialog({
             onClick={onClose}
             disabled={isLoading}
           >
-            {tCommon("cancel")}
+            Cancel
           </Button>
           <Button
             type="button"
@@ -105,7 +102,7 @@ export default function DeleteConfirmDialog({
             disabled={isLoading}
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {tCommon("delete")}
+            Delete
           </Button>
         </DialogFooter>
       </DialogContent>

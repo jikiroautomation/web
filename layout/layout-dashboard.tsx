@@ -1,7 +1,6 @@
 "use client";
 
 import { ReactNode, useState } from "react";
-import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useUser, SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
 import { useUserProfile } from "@/hooks/use-user-profile";
@@ -34,7 +33,6 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
   const { user } = useUser();
   const { needsProfileSetup, isProfileComplete, isLoading } = useUserProfile();
   const isAdmin = useQuery(api.users.isUserAdmin);
-  const t = useTranslations("dashboard");
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -45,39 +43,39 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
         {
           type: "item",
           icon: BarChart3,
-          label: t("navigation.overview"),
+          label: "Overview",
           href: "/dashboard",
         },
         { type: "separator" },
         {
           type: "item",
           icon: Zap,
-          label: t("navigation.services"),
+          label: "Services",
           href: "/admin/services",
         },
         {
           type: "item",
           icon: Users,
-          label: t("navigation.users"),
+          label: "Users",
           href: "/admin/users",
         },
         {
           type: "item",
           icon: DollarSign,
-          label: t("navigation.revenue"),
+          label: "Revenue",
           href: "/admin/revenue",
         },
         { type: "separator" },
         {
           type: "item",
           icon: Settings,
-          label: t("navigation.settings"),
+          label: "Settings",
           href: "/settings",
         },
         {
           type: "item",
           icon: HelpCircle,
-          label: t("navigation.helpdesk"),
+          label: "Helpdesk",
           href: "/admin/helpdesk",
         },
       ];
@@ -87,40 +85,40 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
         {
           type: "item",
           icon: BarChart3,
-          label: t("navigation.overview"),
+          label: "Overview",
           href: "/dashboard",
         },
         { type: "separator" },
         {
           type: "item",
           icon: FileText,
-          label: t("navigation.myProjects"),
+          label: "My Projects",
           href: "/projects",
         },
         {
           type: "item",
           icon: Zap,
-          label: t("navigation.services"),
+          label: "Services",
           href: "/services",
         },
         { type: "separator" },
         {
           type: "item",
           icon: DollarSign,
-          label: t("navigation.billing"),
+          label: "Billing",
           href: "/billing",
         },
         { type: "separator" },
         {
           type: "item",
           icon: Settings,
-          label: t("navigation.settings"),
+          label: "Settings",
           href: "/settings",
         },
         {
           type: "item",
           icon: Info,
-          label: t("navigation.support"),
+          label: "Support",
           href: "/support",
         },
       ];
@@ -273,7 +271,7 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
                 <div className="flex items-center space-x-4">
                   <p className="text-xs text-muted-foreground">
                     © {new Date().getFullYear()} JIKIRO.{" "}
-                    {t("footer.allRightsReserved")}.
+                    All rights reserved.
                   </p>
                 </div>
 
@@ -283,19 +281,19 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
                     href="/privacy"
                     className="text-xs text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {t("footer.privacyPolicy")}
+                    Privacy Policy
                   </Link>
                   <Link
                     href="/terms"
                     className="text-xs text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {t("footer.termsOfService")}
+                    Terms of Service
                   </Link>
                   <Link
                     href="/support"
                     className="text-xs text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {t("footer.support")}
+                    Support
                   </Link>
                 </div>
               </div>

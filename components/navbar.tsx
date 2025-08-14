@@ -4,12 +4,9 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Sun, Moon } from "lucide-react";
-import LanguageSwitcher from "@/components/language-switcher";
-import { useTranslations } from "next-intl";
 import { useAuth } from "@clerk/nextjs";
 
 export default function Navbar() {
-  const tCommon = useTranslations("common");
   const { isSignedIn } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -80,7 +77,6 @@ export default function Navbar() {
 
           {/* Sign In Button - Desktop      */}
           <div className="hidden md:flex items-center space-x-4">
-            <LanguageSwitcher />
             <button
               onClick={toggleDarkMode}
               className="p-2 cursor-pointer rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -98,7 +94,7 @@ export default function Navbar() {
               {isSignedIn ? (
                 <Link href="/dashboard">Dashboard</Link>
               ) : (
-                <Link href="/sign-in">{tCommon("login")}</Link>
+                <Link href="/sign-in">Login</Link>
               )}
             </Button>
           </div>
@@ -143,9 +139,6 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="pt-2 space-y-2">
-                <div className="px-3">
-                  <LanguageSwitcher />
-                </div>
                 <Button
                   asChild
                   className="w-full bg-white/10 dark:bg-black/10 text-gray-900 dark:text-white border border-gray-200/20 dark:border-gray-800/20 hover:bg-white/20 dark:hover:bg-black/20 backdrop-blur-sm shadow-sm"
@@ -156,7 +149,7 @@ export default function Navbar() {
                     </Link>
                   ) : (
                     <Link href="/sign-in" onClick={() => setIsOpen(false)}>
-                      {tCommon("login")}
+                      Login
                     </Link>
                   )}
                 </Button>

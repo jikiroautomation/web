@@ -13,13 +13,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Search, Package } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 const ServicesView = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("name");
-  const t = useTranslations("services.management");
-  const tPublic = useTranslations("services.public");
 
   const services = useQuery(api.services.getAllServices) || [];
 
@@ -41,9 +38,9 @@ const ServicesView = () => {
     <div className="space-y-8">
       {/* Section 1: Header */}
       <div className="space-y-1">
-        <h1 className="text-xl font-bold tracking-tight">{tPublic("title")}</h1>
+        <h1 className="text-xl font-bold tracking-tight">Our Services</h1>
         <p className="text-muted-foreground text-xs">
-          {tPublic("description")}
+          Discover all the services we offer to help you succeed
         </p>
       </div>
 
@@ -52,7 +49,7 @@ const ServicesView = () => {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
           <Input
-            placeholder={t("searchPlaceholder")}
+            placeholder="Search services..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-9"
@@ -60,12 +57,12 @@ const ServicesView = () => {
         </div>
         <Select value={sortBy} onValueChange={setSortBy}>
           <SelectTrigger className="w-full sm:w-48">
-            <SelectValue placeholder={t("sortBy")} />
+            <SelectValue placeholder="Sort by..." />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="name">{t("sortByName")}</SelectItem>
-            <SelectItem value="newest">{t("sortByNewest")}</SelectItem>
-            <SelectItem value="oldest">{t("sortByOldest")}</SelectItem>
+            <SelectItem value="name">Sort by Name</SelectItem>
+            <SelectItem value="newest">Newest First</SelectItem>
+            <SelectItem value="oldest">Oldest First</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -79,13 +76,13 @@ const ServicesView = () => {
             </div>
             <h3 className="text-lg font-semibold mb-2">
               {searchTerm
-                ? tPublic("noServicesFound")
-                : tPublic("noServicesAvailable")}
+                ? "No services found"
+                : "No Services Available"}
             </h3>
             <p className="text-muted-foreground mb-6 max-w-md">
               {searchTerm
-                ? tPublic("noServicesMatchDescription")
-                : tPublic("noServicesAvailableDescription")}
+                ? "No services match your search criteria. Try adjusting your search terms."
+                : "There are currently no services available. Please check back later."}
             </p>
           </CardContent>
         </Card>

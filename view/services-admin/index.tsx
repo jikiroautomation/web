@@ -15,7 +15,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Plus, Search } from "lucide-react";
-import { useTranslations } from "next-intl";
 import ServiceDialog from "@/components/dialogs/ServiceDialog";
 import DeleteConfirmDialog from "@/components/dialogs/DeleteConfirmDialog";
 import ServiceItem from "./ServiceItem";
@@ -49,8 +48,6 @@ const ServicesAdminView = () => {
     service: null,
   });
 
-  const t = useTranslations("services.management");
-  const tCommon = useTranslations("common");
 
   const services = useQuery(api.services.getAllServices) || [];
 
@@ -109,15 +106,15 @@ const ServicesAdminView = () => {
       {/* Section 1: Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="space-y-1">
-          <h1 className="text-xl font-bold tracking-tight">{t("title")}</h1>
-          <p className="text-muted-foreground text-xs">{t("description")}</p>
+          <h1 className="text-xl font-bold tracking-tight">Services Management</h1>
+          <p className="text-muted-foreground text-xs">Manage and organize all services offered to your clients</p>
         </div>
         <Button
           onClick={handleCreateService}
           className="flex items-center gap-2"
         >
           <Plus className="h-4 w-4" />
-          {t("createService")}
+          Create Service
         </Button>
       </div>
 
@@ -126,7 +123,7 @@ const ServicesAdminView = () => {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
           <Input
-            placeholder={t("searchPlaceholder")}
+            placeholder="Search services..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-9"
@@ -134,12 +131,12 @@ const ServicesAdminView = () => {
         </div>
         <Select value={sortBy} onValueChange={setSortBy}>
           <SelectTrigger className="full py-[18px]">
-            <SelectValue placeholder={t("sortBy")} />
+            <SelectValue placeholder="Sort by..." />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="name">{t("sortByName")}</SelectItem>
-            <SelectItem value="newest">{t("sortByNewest")}</SelectItem>
-            <SelectItem value="oldest">{t("sortByOldest")}</SelectItem>
+            <SelectItem value="name">Sort by Name</SelectItem>
+            <SelectItem value="newest">Newest First</SelectItem>
+            <SelectItem value="oldest">Oldest First</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -150,17 +147,17 @@ const ServicesAdminView = () => {
           <CardContent className="flex flex-col items-center justify-center py-16 text-center">
             <div className="text-6xl mb-4">📋</div>
             <h3 className="text-lg font-semibold mb-2">
-              {t("noServicesFound")}
+              No Services Found
             </h3>
             <p className="text-muted-foreground mb-6">
-              {searchTerm ? t("noServicesMatch") : t("getStarted")}
+              {searchTerm ? "No services match your search criteria." : "Get started by creating your first service."}
             </p>
             <Button
               onClick={handleCreateService}
               className="flex items-center gap-2"
             >
               <Plus className="h-4 w-4" />
-              {t("createFirst")}
+              Create First Service
             </Button>
           </CardContent>
         </Card>

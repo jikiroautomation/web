@@ -11,10 +11,8 @@ import {
   Sparkles,
   Star,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 export default function Hero() {
-  const t = useTranslations("hero");
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -26,20 +24,20 @@ export default function Hero() {
             className="mb-8 px-4 py-2 text-xs shadow-2xl font-medium bg-fuchsia-100 text-fuchsia-800 border-fuchsia-200 dark:bg-transparent dark:text-fuchsia-200"
           >
             <Sparkles className="w-4 h-4 mr-2" />
-            {t("badgeText")}
+            Platform Pembuatan Konten Bertenaga AI
           </Badge>
 
           {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-gray-900 mb-8">
             {/* <span className="block">Meet</span> */}
             <span className="block bg-gradient-to-r from-yellow-600 to-pink-600 dark:from-yellow-300 dark:to-pink-300 bg-clip-text text-transparent">
-              {t("title")}
+              JIKIRO
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="max-w-3xl mx-auto text-lg md:text-xl text-gray-600 mb-12 dark:text-gray-100 leading-relaxed">
-            {t("subtitle")}
+            Platform manajemen AI terbaik untuk content creator. Sederhanakan alur kerja Anda dengan otomatisasi cerdas, penjadwalan pintar, dan integrasi WhatsApp yang mulus.
           </p>
 
           {/* Feature Cards */}
@@ -50,10 +48,10 @@ export default function Hero() {
                   <Bot className="w-6 h-6 text-blue-600 group-hover:text-blue-700" />
                 </div>
                 <span className="text-sm font-semibold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors duration-300">
-                  {t("features.aiChatbot.title")}
+                  AI Chatbot
                 </span>
                 <p className="text-xs text-gray-500 group-hover:text-gray-700 transition-colors duration-300">
-                  {t("features.aiChatbot.description")}
+                  Asisten cerdas untuk buat konten
                 </p>
               </CardContent>
             </Card>
@@ -63,10 +61,10 @@ export default function Hero() {
                   <Calendar className="w-6 h-6 text-orange-600 group-hover:text-orange-700" />
                 </div>
                 <span className="text-sm font-semibold text-gray-900 mb-1 group-hover:text-orange-600 transition-colors duration-300">
-                  {t("features.smartScheduling.title")}
+                  Penjadwalan Pintar
                 </span>
                 <p className="text-xs text-gray-500 group-hover:text-gray-700 transition-colors duration-300">
-                  {t("features.smartScheduling.description")}
+                  Perencanaan kalender otomatis
                 </p>
               </CardContent>
             </Card>
@@ -76,10 +74,10 @@ export default function Hero() {
                   <MessageSquare className="w-6 h-6 text-purple-600 group-hover:text-purple-700" />
                 </div>
                 <span className="text-sm font-semibold text-gray-900 mb-1 group-hover:text-purple-600 transition-colors duration-300">
-                  {t("features.whatsappIntegration.title")}
+                  Integrasi WhatsApp
                 </span>
                 <p className="text-xs text-gray-500 group-hover:text-gray-700 transition-colors duration-300">
-                  {t("features.whatsappIntegration.description")}
+                  Alur kerja komunikasi yang mulus
                 </p>
               </CardContent>
             </Card>
@@ -91,7 +89,7 @@ export default function Hero() {
               size="lg"
               className="font-semibold hover:shadow-xl transition-all duration-300"
             >
-              {t("cta.getStartedFree")}
+              Mulai Gratis
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
@@ -106,11 +104,11 @@ export default function Hero() {
                 />
               ))}
               <span className="ml-2 text-sm text-gray-600 dark:text-gray-300">
-                {t("socialProof.rating")}
+                5.0 dari 1000+ kreator
               </span>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {t("socialProof.trusted")}
+              Dipercaya oleh kreator konten di seluruh dunia
             </p>
           </div>
         </div>

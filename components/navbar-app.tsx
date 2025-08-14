@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Bell, Menu, Sun, Moon } from "lucide-react";
-import LanguageSwitcher from "./language-switcher";
 import { UserButton } from "@clerk/nextjs";
 
 interface NavbarAppProps {
@@ -57,9 +56,6 @@ const NavbarApp = ({ isSidebarOpen, setIsSidebarOpen }: NavbarAppProps) => {
 
           {/* Right side */}
           <div className="flex items-center space-x-2 md:space-x-4">
-            <div className="hidden sm:block">
-              <LanguageSwitcher />
-            </div>
             <Button
               variant="ghost"
               size="sm"

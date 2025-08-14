@@ -11,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal, Edit, Trash2, Eye } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { Id } from "../../convex/_generated/dataModel";
 
 interface Service {
@@ -34,7 +33,6 @@ const ServiceItem: React.FC<ServiceItemProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const tCommon = useTranslations("common");
 
   return (
     <Card className="hover:shadow-lg transition-shadow cursor-pointer">
@@ -54,7 +52,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({
                 className="cursor-pointer"
               >
                 <Edit className="mr-2 h-4 w-4" />
-                {tCommon("edit")}
+                Edit
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer">
                 <Eye className="mr-2 h-4 w-4" />
@@ -67,7 +65,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({
                 className="cursor-pointer"
               >
                 <Trash2 className="mr-2 h-4 w-4" />
-                {tCommon("delete")}
+                Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
