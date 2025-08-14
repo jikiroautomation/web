@@ -3,9 +3,15 @@
 import React, { useState } from "react";
 import { useQuery } from "convex/react";
 import { Toaster } from "sonner";
-import { api } from "../../convex/_generated/api";
+import { api } from "../../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Plus, Search, Edit, Trash2, ArrowLeft } from "lucide-react";
-import { Id } from "../../convex/_generated/dataModel";
+import { Id } from "../../../convex/_generated/dataModel";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import PlanDeleteDialog from "@/components/dialogs/PlanDeleteDialog";
@@ -52,13 +58,14 @@ const ServicePlansView = ({ serviceId }: ServicePlansViewProps) => {
     plan: null,
   });
 
-  const service = useQuery(api.services.getServiceById, { 
-    serviceId: serviceId as Id<"services"> 
+  const service = useQuery(api.services.getServiceById, {
+    serviceId: serviceId as Id<"services">,
   });
-  
-  const plans = useQuery(api.servicePlans.getServicePlansByServiceId, {
-    serviceId: serviceId as Id<"services">
-  }) || [];
+
+  const plans =
+    useQuery(api.servicePlans.getServicePlansByServiceId, {
+      serviceId: serviceId as Id<"services">,
+    }) || [];
 
   const filteredPlans = plans
     .filter(
@@ -67,7 +74,8 @@ const ServicePlansView = ({ serviceId }: ServicePlansViewProps) => {
         plan.description.toLowerCase().includes(searchTerm.toLowerCase()),
     )
     .sort((a, b) => {
-      if (sortBy === "sortOrder") return (a.sortOrder || 0) - (b.sortOrder || 0);
+      if (sortBy === "sortOrder")
+        return (a.sortOrder || 0) - (b.sortOrder || 0);
       if (sortBy === "name") return a.planName.localeCompare(b.planName);
       if (sortBy === "price") return a.price - b.price;
       if (sortBy === "newest") return b.createdAt - a.createdAt;
@@ -85,10 +93,14 @@ const ServicePlansView = ({ serviceId }: ServicePlansViewProps) => {
 
   const getBillingPeriodText = (period: string) => {
     switch (period) {
-      case "monthly": return "/bulan";
-      case "yearly": return "/tahun";
-      case "lifetime": return " selamanya";
-      default: return "";
+      case "monthly":
+        return "/bulan";
+      case "yearly":
+        return "/tahun";
+      case "lifetime":
+        return " selamanya";
+      default:
+        return "";
     }
   };
 
@@ -130,8 +142,8 @@ const ServicePlansView = ({ serviceId }: ServicePlansViewProps) => {
     <div className="space-y-8">
       <div className="space-y-4">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Link 
-            href="/admin/services" 
+          <Link
+            href="/admin/services"
             className="hover:text-foreground transition-colors flex items-center gap-1"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -142,14 +154,18 @@ const ServicePlansView = ({ serviceId }: ServicePlansViewProps) => {
           <span>/</span>
           <span>Plans</span>
         </div>
-        
+
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-3">
               <span className="text-2xl">{service.emoji}</span>
               <div>
-                <h1 className="text-xl font-bold tracking-tight">{service.name} Plans</h1>
-                <p className="text-muted-foreground text-xs">Manage pricing plans for this service</p>
+                <h1 className="text-xl font-bold tracking-tight">
+                  {service.name} Plans
+                </h1>
+                <p className="text-muted-foreground text-xs">
+                  Manage pricing plans for this service
+                </p>
               </div>
             </div>
           </div>
@@ -190,14 +206,11 @@ const ServicePlansView = ({ serviceId }: ServicePlansViewProps) => {
         <Card className="w-full">
           <CardContent className="flex flex-col items-center justify-center py-16 text-center">
             <div className="text-6xl mb-4">💰</div>
-            <h3 className="text-lg font-semibold mb-2">
-              No Plans Found
-            </h3>
+            <h3 className="text-lg font-semibold mb-2">No Plans Found</h3>
             <p className="text-muted-foreground mb-6">
-              {searchTerm 
-                ? "No plans match your search criteria." 
-                : "Get started by creating your first pricing plan for this service."
-              }
+              {searchTerm
+                ? "No plans match your search criteria."
+                : "Get started by creating your first pricing plan for this service."}
             </p>
             <Button
               onClick={handleCreatePlan}
@@ -211,13 +224,16 @@ const ServicePlansView = ({ serviceId }: ServicePlansViewProps) => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredPlans.map((plan) => (
-            <Card key={plan._id} className={`relative ${plan.isPopular ? 'border-primary shadow-md' : ''}`}>
+            <Card
+              key={plan._id}
+              className={`relative ${plan.isPopular ? "border-primary shadow-md" : ""}`}
+            >
               {plan.isPopular && (
                 <Badge className="absolute -top-2 left-4 bg-primary text-primary-foreground">
                   Most Popular
                 </Badge>
               )}
-              
+
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg">{plan.planName}</CardTitle>
@@ -243,7 +259,7 @@ const ServicePlansView = ({ serviceId }: ServicePlansViewProps) => {
                   {plan.description}
                 </CardDescription>
               </CardHeader>
-              
+
               <CardContent className="space-y-4">
                 <div className="text-center py-4 border rounded-lg bg-muted/30">
                   <div className="text-3xl font-bold">
@@ -259,19 +275,22 @@ const ServicePlansView = ({ serviceId }: ServicePlansViewProps) => {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <h4 className="font-medium text-sm">Features:</h4>
                   <ul className="space-y-1">
                     {plan.items.map((item, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm">
+                      <li
+                        key={index}
+                        className="flex items-start gap-2 text-sm"
+                      >
                         <span className="text-green-500 mt-0.5">✓</span>
                         <span className="text-muted-foreground">{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                
+
                 <div className="pt-2 border-t">
                   <div className="flex items-center justify-between text-xs text-muted-foreground">
                     <span>Status: {plan.isActive ? "Active" : "Inactive"}</span>

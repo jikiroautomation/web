@@ -4,9 +4,15 @@ import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { api } from "../../convex/_generated/api";
+import { api } from "../../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,7 +26,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Plus, Trash2, Loader2 } from "lucide-react";
-import { Id } from "../../convex/_generated/dataModel";
+import { Id } from "../../../convex/_generated/dataModel";
 import Link from "next/link";
 
 interface EditPlanViewProps {
@@ -65,12 +71,12 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
     isActive: true,
   });
 
-  const service = useQuery(api.services.getServiceById, { 
-    serviceId: serviceId as Id<"services"> 
+  const service = useQuery(api.services.getServiceById, {
+    serviceId: serviceId as Id<"services">,
   });
 
   const plan = useQuery(api.servicePlans.getPlanById, {
-    planId: planId as Id<"servicePlans">
+    planId: planId as Id<"servicePlans">,
   });
 
   const updatePlan = useMutation(api.servicePlans.updateServicePlan);
@@ -125,30 +131,33 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (field: keyof FormData, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (
+    field: keyof FormData,
+    value: string | boolean,
+  ) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field as keyof FormErrors]) {
-      setErrors(prev => ({ ...prev, [field]: undefined }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
   };
 
   const handleAddItem = () => {
     if (newItem.trim()) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        items: [...prev.items, newItem.trim()]
+        items: [...prev.items, newItem.trim()],
       }));
       setNewItem("");
       if (errors.items) {
-        setErrors(prev => ({ ...prev, items: undefined }));
+        setErrors((prev) => ({ ...prev, items: undefined }));
       }
     }
   };
 
   const handleRemoveItem = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      items: prev.items.filter((_, i) => i !== index)
+      items: prev.items.filter((_, i) => i !== index),
     }));
   };
 
@@ -161,7 +170,7 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       toast.error("Please fix the validation errors");
       return;
@@ -208,7 +217,9 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
           <div className="text-6xl mb-4">=</div>
           <h3 className="text-lg font-semibold mb-2">Loading...</h3>
           <p className="text-muted-foreground">
-            {!service || !plan ? "Getting plan information" : "Loading form data"}
+            {!service || !plan
+              ? "Getting plan information"
+              : "Loading form data"}
           </p>
         </div>
       </div>
@@ -220,14 +231,14 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
       {/* Header with Breadcrumb */}
       <div className="space-y-4">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Link 
-            href="/admin/services" 
+          <Link
+            href="/admin/services"
             className="hover:text-foreground transition-colors"
           >
             Services
           </Link>
           <span>/</span>
-          <Link 
+          <Link
             href={`/admin/services/${serviceId}/plans`}
             className="hover:text-foreground transition-colors flex items-center gap-1"
           >
@@ -237,12 +248,14 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
           <span>/</span>
           <span>Edit {plan.planName}</span>
         </div>
-        
+
         <div>
           <div className="flex items-center gap-3 mb-2">
             <span className="text-2xl">{service.emoji}</span>
             <div>
-              <h1 className="text-xl font-bold tracking-tight">Edit Plan: {plan.planName}</h1>
+              <h1 className="text-xl font-bold tracking-tight">
+                Edit Plan: {plan.planName}
+              </h1>
               <div className="flex items-center gap-2 mt-1">
                 <Badge variant={plan.isActive ? "default" : "secondary"}>
                   {plan.isActive ? "Active" : "Inactive"}
@@ -293,7 +306,9 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
                 id="description"
                 placeholder="Describe what this plan offers..."
                 value={formData.description}
-                onChange={(e) => handleInputChange("description", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("description", e.target.value)
+                }
                 className={errors.description ? "border-red-500" : ""}
                 rows={3}
               />
@@ -373,13 +388,18 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
                     Add
                   </Button>
                 </div>
-                
+
                 {formData.items.length > 0 && (
                   <div className="space-y-2">
-                    <p className="text-sm font-medium">Features ({formData.items.length}):</p>
+                    <p className="text-sm font-medium">
+                      Features ({formData.items.length}):
+                    </p>
                     <div className="space-y-2">
                       {formData.items.map((item, index) => (
-                        <div key={index} className="flex items-center justify-between bg-muted/50 rounded-lg p-3">
+                        <div
+                          key={index}
+                          className="flex items-center justify-between bg-muted/50 rounded-lg p-3"
+                        >
                           <div className="flex items-center gap-2">
                             <span className="text-green-500"></span>
                             <span className="text-sm">{item}</span>
@@ -398,7 +418,7 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
                     </div>
                   </div>
                 )}
-                
+
                 {errors.items && (
                   <p className="text-sm text-red-500">{errors.items}</p>
                 )}
@@ -415,7 +435,9 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
                   min="0"
                   placeholder="0"
                   value={formData.sortOrder}
-                  onChange={(e) => handleInputChange("sortOrder", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("sortOrder", e.target.value)
+                  }
                   className={errors.sortOrder ? "border-red-500" : ""}
                 />
                 {errors.sortOrder && (
@@ -432,7 +454,9 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
                   <Switch
                     id="isPopular"
                     checked={formData.isPopular}
-                    onCheckedChange={(checked) => handleInputChange("isPopular", checked)}
+                    onCheckedChange={(checked) =>
+                      handleInputChange("isPopular", checked)
+                    }
                   />
                   <Label htmlFor="isPopular" className="text-sm">
                     Most Popular
@@ -449,13 +473,18 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
                   <Switch
                     id="isActive"
                     checked={formData.isActive}
-                    onCheckedChange={(checked) => handleInputChange("isActive", checked)}
+                    onCheckedChange={(checked) =>
+                      handleInputChange("isActive", checked)
+                    }
                   />
                   <Label htmlFor="isActive" className="text-sm">
                     Active
                   </Label>
                 </div>
-                <Badge variant={formData.isActive ? "default" : "secondary"} className="text-xs">
+                <Badge
+                  variant={formData.isActive ? "default" : "secondary"}
+                  className="text-xs"
+                >
                   {formData.isActive ? "Active" : "Inactive"}
                 </Badge>
               </div>
@@ -466,12 +495,18 @@ const EditPlanView = ({ serviceId, planId }: EditPlanViewProps) => {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => router.push(`/admin/services/${serviceId}/plans`)}
+                onClick={() =>
+                  router.push(`/admin/services/${serviceId}/plans`)
+                }
                 disabled={isSubmitting}
               >
                 Cancel
               </Button>
-              <Button type="submit" disabled={isSubmitting} className="min-w-[120px]">
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="min-w-[120px]"
+              >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin mr-2" />

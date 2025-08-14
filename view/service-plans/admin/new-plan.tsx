@@ -4,9 +4,15 @@ import React, { useState } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { api } from "../../convex/_generated/api";
+import { api } from "../../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,7 +26,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Plus, Trash2, Loader2 } from "lucide-react";
-import { Id } from "../../convex/_generated/dataModel";
+import { Id } from "../../../convex/_generated/dataModel";
 import Link from "next/link";
 
 interface NewPlanViewProps {
@@ -61,8 +67,8 @@ const NewPlanView = ({ serviceId }: NewPlanViewProps) => {
     sortOrder: "0",
   });
 
-  const service = useQuery(api.services.getServiceById, { 
-    serviceId: serviceId as Id<"services"> 
+  const service = useQuery(api.services.getServiceById, {
+    serviceId: serviceId as Id<"services">,
   });
 
   const createPlan = useMutation(api.servicePlans.createServicePlan);
@@ -100,30 +106,33 @@ const NewPlanView = ({ serviceId }: NewPlanViewProps) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (field: keyof FormData, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (
+    field: keyof FormData,
+    value: string | boolean,
+  ) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field as keyof FormErrors]) {
-      setErrors(prev => ({ ...prev, [field]: undefined }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
   };
 
   const handleAddItem = () => {
     if (newItem.trim()) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        items: [...prev.items, newItem.trim()]
+        items: [...prev.items, newItem.trim()],
       }));
       setNewItem("");
       if (errors.items) {
-        setErrors(prev => ({ ...prev, items: undefined }));
+        setErrors((prev) => ({ ...prev, items: undefined }));
       }
     }
   };
 
   const handleRemoveItem = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      items: prev.items.filter((_, i) => i !== index)
+      items: prev.items.filter((_, i) => i !== index),
     }));
   };
 
@@ -136,7 +145,7 @@ const NewPlanView = ({ serviceId }: NewPlanViewProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       toast.error("Please fix the validation errors");
       return;
@@ -192,14 +201,14 @@ const NewPlanView = ({ serviceId }: NewPlanViewProps) => {
       {/* Header with Breadcrumb */}
       <div className="space-y-4">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Link 
-            href="/admin/services" 
+          <Link
+            href="/admin/services"
             className="hover:text-foreground transition-colors"
           >
             Services
           </Link>
           <span>/</span>
-          <Link 
+          <Link
             href={`/admin/services/${serviceId}/plans`}
             className="hover:text-foreground transition-colors flex items-center gap-1"
           >
@@ -209,11 +218,13 @@ const NewPlanView = ({ serviceId }: NewPlanViewProps) => {
           <span>/</span>
           <span>New Plan</span>
         </div>
-        
+
         <div>
           <div className="flex items-center gap-3 mb-2">
             <span className="text-2xl">{service.emoji}</span>
-            <h1 className="text-xl font-bold tracking-tight">Create New Plan</h1>
+            <h1 className="text-xl font-bold tracking-tight">
+              Create New Plan
+            </h1>
           </div>
           <p className="text-muted-foreground text-sm">
             Create a new pricing plan for {service.name}
@@ -253,7 +264,9 @@ const NewPlanView = ({ serviceId }: NewPlanViewProps) => {
                 id="description"
                 placeholder="Describe what this plan offers..."
                 value={formData.description}
-                onChange={(e) => handleInputChange("description", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("description", e.target.value)
+                }
                 className={errors.description ? "border-red-500" : ""}
                 rows={3}
               />
@@ -333,13 +346,18 @@ const NewPlanView = ({ serviceId }: NewPlanViewProps) => {
                     Add
                   </Button>
                 </div>
-                
+
                 {formData.items.length > 0 && (
                   <div className="space-y-2">
-                    <p className="text-sm font-medium">Features ({formData.items.length}):</p>
+                    <p className="text-sm font-medium">
+                      Features ({formData.items.length}):
+                    </p>
                     <div className="space-y-2">
                       {formData.items.map((item, index) => (
-                        <div key={index} className="flex items-center justify-between bg-muted/50 rounded-lg p-3">
+                        <div
+                          key={index}
+                          className="flex items-center justify-between bg-muted/50 rounded-lg p-3"
+                        >
                           <div className="flex items-center gap-2">
                             <span className="text-green-500"></span>
                             <span className="text-sm">{item}</span>
@@ -358,7 +376,7 @@ const NewPlanView = ({ serviceId }: NewPlanViewProps) => {
                     </div>
                   </div>
                 )}
-                
+
                 {errors.items && (
                   <p className="text-sm text-red-500">{errors.items}</p>
                 )}
@@ -375,7 +393,9 @@ const NewPlanView = ({ serviceId }: NewPlanViewProps) => {
                   min="0"
                   placeholder="0"
                   value={formData.sortOrder}
-                  onChange={(e) => handleInputChange("sortOrder", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("sortOrder", e.target.value)
+                  }
                   className={errors.sortOrder ? "border-red-500" : ""}
                 />
                 {errors.sortOrder && (
@@ -392,7 +412,9 @@ const NewPlanView = ({ serviceId }: NewPlanViewProps) => {
                   <Switch
                     id="isPopular"
                     checked={formData.isPopular}
-                    onCheckedChange={(checked) => handleInputChange("isPopular", checked)}
+                    onCheckedChange={(checked) =>
+                      handleInputChange("isPopular", checked)
+                    }
                   />
                   <Label htmlFor="isPopular" className="text-sm">
                     Mark as "Most Popular"
@@ -409,12 +431,18 @@ const NewPlanView = ({ serviceId }: NewPlanViewProps) => {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => router.push(`/admin/services/${serviceId}/plans`)}
+                onClick={() =>
+                  router.push(`/admin/services/${serviceId}/plans`)
+                }
                 disabled={isSubmitting}
               >
                 Cancel
               </Button>
-              <Button type="submit" disabled={isSubmitting} className="min-w-[120px]">
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="min-w-[120px]"
+              >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin mr-2" />
