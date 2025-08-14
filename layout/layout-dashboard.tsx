@@ -128,10 +128,7 @@ export default function LayoutDashboard({ children }: LayoutDashboardProps) {
   const menuItems = getMenuItems();
 
   const isActive = (href: string) => {
-    // Remove locale prefix from pathname (e.g., "/en/dashboard" -> "/dashboard")
-    const pathnameWithoutLocale = pathname.replace(/^\/[a-z]{2}/, "");
-
-    return pathnameWithoutLocale.startsWith(href);
+    return pathname.startsWith(href);
   };
 
   return (

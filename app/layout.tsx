@@ -62,7 +62,10 @@ export default async function RootLayout({
   return (
     <html>
       <body className={`${poppins.variable} antialiased`}>
-        <ClerkProvider dynamic>
+        <ClerkProvider 
+          publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+          dynamic
+        >
           <ConvexClientProvider>{children}</ConvexClientProvider>
         </ClerkProvider>
       </body>
