@@ -61,6 +61,35 @@ export const getUserEnrolledServices = query({
   },
 });
 
+// Query - Get user's enrolled services with service and plan details
+export const getUserEnrolledServicesWithDetails = query({
+  args: {},
+  handler: async (ctx) => {
+    const user = await getCurrentUser(ctx);
+
+    const enrollments = await ctx.db
+      .query("enrolledServices")
+      .withIndex("by_user_id", (q) => q.eq("userId", user._id))
+      .collect();
+
+    // Get service and plan details for each enrollment
+    const enrollmentsWithDetails = await Promise.all(
+      enrollments.map(async (enrollment) => {
+        const service = await ctx.db.get(enrollment.serviceId);
+        const plan = await ctx.db.get(enrollment.planId);
+
+        return {
+          ...enrollment,
+          service,
+          plan,
+        };
+      })
+    );
+
+    return enrollmentsWithDetails;
+  },
+});
+
 // Query - Get enrolled service by ID
 export const getEnrolledServiceById = query({
   args: { enrollmentId: v.id("enrolledServices") },
