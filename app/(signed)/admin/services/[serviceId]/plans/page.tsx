@@ -10,15 +10,19 @@ export const metadata: Metadata = {
 };
 
 interface ServicePlansPageProps {
-  params: {
+  params: Promise<{
     serviceId: string;
-  };
+  }>;
 }
 
-export default function ServicePlansPage({ params }: ServicePlansPageProps) {
+export default async function ServicePlansPage({
+  params,
+}: ServicePlansPageProps) {
+  const serviceId = (await params).serviceId;
+
   return (
     <LayoutDashboard>
-      <ServicePlansView serviceId={params.serviceId} />
+      <ServicePlansView serviceId={serviceId} />
     </LayoutDashboard>
   );
 }

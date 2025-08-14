@@ -10,16 +10,18 @@ export const metadata: Metadata = {
 };
 
 interface EditPlanPageProps {
-  params: {
+  params: Promise<{
     serviceId: string;
     planId: string;
-  };
+  }>;
 }
 
-export default function EditPlanPage({ params }: EditPlanPageProps) {
+export default async function EditPlanPage({ params }: EditPlanPageProps) {
+  const { serviceId, planId } = await params;
+
   return (
     <LayoutDashboard>
-      <EditPlanView serviceId={params.serviceId} planId={params.planId} />
+      <EditPlanView serviceId={serviceId} planId={planId} />
     </LayoutDashboard>
   );
 }

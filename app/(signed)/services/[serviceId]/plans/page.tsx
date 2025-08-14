@@ -4,20 +4,25 @@ import ServicePlansUserView from "@/view/service-plans/user";
 
 export const metadata: Metadata = {
   title: "Service Plans - JIKIRO",
-  description: "Choose the perfect plan for your needs. Flexible pricing options for all service tiers.",
+  description:
+    "Choose the perfect plan for your needs. Flexible pricing options for all service tiers.",
   robots: "index, follow",
 };
 
 interface ServicePlansUserPageProps {
-  params: {
+  params: Promise<{
     serviceId: string;
-  };
+  }>;
 }
 
-export default function ServicePlansUserPage({ params }: ServicePlansUserPageProps) {
+export default async function ServicePlansUserPage({
+  params,
+}: ServicePlansUserPageProps) {
+  const { serviceId } = await params;
+
   return (
     <LayoutDashboard>
-      <ServicePlansUserView serviceId={params.serviceId} />
+      <ServicePlansUserView serviceId={serviceId} />
     </LayoutDashboard>
   );
 }
