@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal, Edit, Trash2, Eye } from "lucide-react";
 import { Id } from "../../convex/_generated/dataModel";
+import { useRouter } from "next/navigation";
 
 interface Service {
   _id: Id<"services">;
@@ -33,6 +34,11 @@ const ServiceItem: React.FC<ServiceItemProps> = ({
   onEdit,
   onDelete,
 }) => {
+  const navigate = useRouter();
+
+  const handleNavigate = () => {
+    navigate.push(`/admin/services/${service._id}/plans`);
+  };
 
   return (
     <Card className="hover:shadow-lg transition-shadow cursor-pointer">
@@ -54,7 +60,10 @@ const ServiceItem: React.FC<ServiceItemProps> = ({
                 <Edit className="mr-2 h-4 w-4" />
                 Edit
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={handleNavigate}
+              >
                 <Eye className="mr-2 h-4 w-4" />
                 View Details
               </DropdownMenuItem>

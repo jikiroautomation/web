@@ -26,4 +26,23 @@ export default defineSchema({
     createdAt: v.number(),
     updatedAt: v.number(),
   }).index("by_name", ["name"]),
+  servicePlans: defineTable({
+    serviceId: v.id("services"),
+    planName: v.string(),
+    description: v.string(),
+    price: v.number(),
+    billingPeriod: v.union(
+      v.literal("monthly"),
+      v.literal("yearly"),
+      v.literal("lifetime"),
+    ),
+    items: v.array(v.string()),
+    isPopular: v.optional(v.boolean()),
+    sortOrder: v.optional(v.number()),
+    isActive: v.boolean(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_service_id", ["serviceId"])
+    .index("by_service_and_active", ["serviceId", "isActive"]),
 });
