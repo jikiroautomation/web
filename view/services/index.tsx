@@ -12,7 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, Package } from "lucide-react";
+import { Search, Package, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const ServicesView = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -89,26 +90,33 @@ const ServicesView = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredServices.map((service) => (
-            <Card
-              key={service._id}
-              className="hover:shadow-lg transition-shadow cursor-pointer group"
+            <Link 
+              key={service._id} 
+              href={`/services/${service._id}/plans`}
+              className="block"
             >
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="text-3xl">{service.emoji}</div>
-                    <CardTitle className="text-lg group-hover:text-primary transition-colors">
-                      {service.name}
-                    </CardTitle>
+              <Card className="hover:shadow-lg transition-all cursor-pointer group h-full">
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="text-3xl">{service.emoji}</div>
+                      <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                        {service.name}
+                      </CardTitle>
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100" />
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-sm line-clamp-3">
-                  {service.description}
-                </p>
-              </CardContent>
-            </Card>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm line-clamp-3">
+                    {service.description}
+                  </p>
+                  <div className="mt-4 text-xs text-primary font-medium group-hover:underline">
+                    Lihat Plans & Pricing →
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       )}
