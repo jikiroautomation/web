@@ -8,6 +8,7 @@ import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 import PaymentConfirmDialog from "@/components/dialogs/PaymentConfirmDialog";
+import { useRouter } from "next/navigation";
 
 interface CheckoutCardProps {
   selectedPlan: any;
@@ -23,6 +24,8 @@ const CheckoutCard = ({
   onSuccess,
 }: CheckoutCardProps) => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+
+  const router = useRouter();
   const createEnrollment = useMutation(api.enrolledServices.createEnrollment);
   const formatPrice = (price: number, period: string) => {
     const formattedPrice = new Intl.NumberFormat("id-ID", {
@@ -52,6 +55,8 @@ const CheckoutCard = ({
       });
 
       toast("Anda telah berhasil berlangganan. Selamat menikmati layanan!");
+
+      router.push("/projects");
 
       setShowConfirmDialog(false);
       onSuccess?.();
